@@ -54,14 +54,14 @@ export const formatNumber = (n) => {
   return `₹${n}`;
 };
 
-// Status colors
+// Status colors — visible in both light and dark mode
 export const STATUS_COLORS = {
   new: 'bg-blue-100 text-blue-700',
-  contacted: 'bg-yellow-100 text-yellow-700',
-  qualified: 'bg-purple-100 text-purple-700',
+  contacted: 'bg-amber-100 text-amber-700',
+  qualified: 'bg-violet-100 text-violet-700',
   'proposal-sent': 'bg-orange-100 text-orange-700',
   negotiation: 'bg-pink-100 text-pink-700',
-  won: 'bg-green-100 text-green-700',
+  won: 'bg-emerald-100 text-emerald-700',
   lost: 'bg-red-100 text-red-700',
 };
 
@@ -76,8 +76,8 @@ export const STATUS_LABELS = {
 };
 
 export const PRIORITY_COLORS = {
-  low: 'bg-gray-100 text-gray-600',
-  medium: 'bg-yellow-100 text-yellow-700',
+  low: 'bg-slate-100 text-slate-600',
+  medium: 'bg-amber-100 text-amber-700',
   high: 'bg-red-100 text-red-700',
 };
 

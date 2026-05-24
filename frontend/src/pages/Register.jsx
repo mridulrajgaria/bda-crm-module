@@ -59,7 +59,7 @@ export default function Register() {
   return (
     <div className="min-h-screen flex">
       {/* Left panel */}
-      <div className="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-slate-900 via-indigo-950 to-slate-900 flex-col justify-between p-12">
+      <div className="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-gray-900 via-teal-950 to-gray-900 flex-col justify-between p-12">
         <div className="flex items-center gap-3">
           <div className="w-10 h-10 bg-indigo-500 rounded-xl flex items-center justify-center">
             <Zap size={20} className="text-white" />
@@ -97,7 +97,7 @@ export default function Register() {
       <div className="flex-1 flex items-center justify-center p-6 bg-gray-50">
         <div className="w-full max-w-sm">
           {/* Mobile logo */}
-          <div className="flex items-center gap-2 mb-8 lg:hidden">
+          <div className="w-10 h-10 bg-teal-500 rounded-xl flex items-center justify-center">
             <div className="w-9 h-9 bg-indigo-600 rounded-xl flex items-center justify-center">
               <Zap size={18} className="text-white" />
             </div>

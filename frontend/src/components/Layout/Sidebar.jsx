@@ -16,9 +16,9 @@ const navItems = [
 ];
 
 const ROLE_BADGE = {
-  admin: { label: 'Admin', className: 'bg-red-100 text-red-700' },
-  manager: { label: 'Manager', className: 'bg-purple-100 text-purple-700' },
-  bda: { label: 'BDA', className: 'bg-blue-100 text-blue-700' },
+  admin: { label: 'Admin', className: 'bg-red-500/20 text-red-300' },
+  manager: { label: 'Manager', className: 'bg-teal-500/20 text-teal-300' },
+  bda: { label: 'BDA', className: 'bg-blue-500/20 text-blue-300' },
 };
 
 export default function Sidebar({ open, onClose }) {
@@ -32,35 +32,38 @@ export default function Sidebar({ open, onClose }) {
   return (
     <>
       {open && (
-        <div className="fixed inset-0 bg-black/40 z-20 lg:hidden" onClick={onClose} />
+        <div className="fixed inset-0 bg-black/50 z-20 lg:hidden" onClick={onClose} />
       )}
 
-      <aside className={`fixed top-0 left-0 h-full w-64 bg-slate-900 text-white flex flex-col z-30 transition-transform duration-300 ease-in-out ${open ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}`}>
-
+      <aside className={`fixed top-0 left-0 h-full w-64 flex flex-col z-30 transition-transform duration-300 ease-in-out ${open ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}`}
+        style={{ background: 'linear-gradient(180deg, #0f2027 0%, #0d3d38 50%, #0f2027 100%)' }}
+      >
+        {/* Logo */}
         <Link
           to="/dashboard"
           onClick={onClose}
-          className="flex items-center justify-between px-5 h-16 border-b border-slate-700/60 hover:bg-slate-800/50 transition-colors"
+          className="flex items-center justify-between px-5 h-16 border-b border-teal-900/50 hover:bg-teal-900/20 transition-colors"
         >
           <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 bg-indigo-500 rounded-lg flex items-center justify-center">
+            <div className="w-8 h-8 bg-teal-500 rounded-lg flex items-center justify-center shadow-lg shadow-teal-500/30">
               <Zap size={16} className="text-white" />
             </div>
             <div>
-              <p className="text-sm font-bold leading-tight">Isaii CRM</p>
-              <p className="text-[10px] text-slate-400">Manufacturing BDA</p>
+              <p className="text-sm font-bold leading-tight text-white">Isaii CRM</p>
+              <p className="text-[10px] text-teal-400">Manufacturing BDA</p>
             </div>
           </div>
           <button
             onClick={(e) => { e.preventDefault(); onClose(); }}
-            className="lg:hidden p-1 rounded hover:bg-slate-700"
+            className="lg:hidden p-1 rounded hover:bg-teal-900/30 text-teal-400"
           >
             <X size={18} />
           </button>
         </Link>
 
+        {/* Nav */}
         <nav className="flex-1 overflow-y-auto py-4 px-3">
-          <p className="text-[10px] font-semibold text-slate-500 uppercase tracking-widest px-3 mb-2">Menu</p>
+          <p className="text-[10px] font-semibold text-teal-600 uppercase tracking-widest px-3 mb-2">Menu</p>
           <ul className="space-y-0.5">
             {filtered.map((item) => (
               <li key={item.to}>
@@ -69,10 +72,10 @@ export default function Sidebar({ open, onClose }) {
                   end={item.to === '/leads' || item.to === '/dashboard'}
                   onClick={onClose}
                   className={({ isActive }) =>
-                    `flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors group ${
+                    `flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all group ${
                       isActive
-                        ? 'bg-indigo-600 text-white'
-                        : 'text-slate-300 hover:bg-slate-800 hover:text-white'
+                        ? 'bg-teal-500 text-white shadow-lg shadow-teal-500/25'
+                        : 'text-slate-300 hover:bg-teal-900/30 hover:text-white'
                     }`
                   }
                 >
@@ -85,16 +88,17 @@ export default function Sidebar({ open, onClose }) {
           </ul>
         </nav>
 
+        {/* User card */}
         <Link
           to="/profile"
           onClick={onClose}
-          className="p-3 border-t border-slate-700/60 hover:bg-slate-800/50 transition-colors"
+          className="p-3 border-t border-teal-900/50 hover:bg-teal-900/20 transition-colors"
         >
           <div className="flex items-center gap-3 px-2 py-2">
             {avatarUrl ? (
-              <img src={avatarUrl} alt={user?.name} className="w-9 h-9 rounded-full object-cover flex-shrink-0" />
+              <img src={avatarUrl} alt={user?.name} className="w-9 h-9 rounded-full object-cover flex-shrink-0 ring-2 ring-teal-500/30" />
             ) : (
-              <div className="w-9 h-9 rounded-full bg-indigo-500 flex items-center justify-center text-sm font-bold flex-shrink-0">
+              <div className="w-9 h-9 rounded-full bg-teal-600 flex items-center justify-center text-sm font-bold flex-shrink-0 text-white">
                 {initials}
               </div>
             )}
