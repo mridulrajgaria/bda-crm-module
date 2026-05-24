@@ -15,7 +15,7 @@ router.post('/login', [
 router.get('/me', protect, getMe);
 router.put('/profile', protect, updateProfile);
 router.put('/change-password', protect, changePassword);
-router.post('/register', protect, authorize('admin'), [
+router.post('/register', [
   body('name').notEmpty().withMessage('Name is required'),
   body('email').isEmail().withMessage('Enter a valid email'),
   body('role').isIn(['admin', 'manager', 'bda']).withMessage('Invalid role'),
