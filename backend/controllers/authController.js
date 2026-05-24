@@ -27,7 +27,6 @@ const login = async (req, res) => {
       return res.status(403).json({ success: false, message: 'Your account has been deactivated. Contact admin.' });
     }
 
-    // Update last login
     user.lastLogin = new Date();
     await user.save({ validateBeforeSave: false });
 
@@ -108,16 +107,16 @@ const changePassword = async (req, res) => {
   }
 };
 
-// @desc    Register new user (admin only)
+// @desc    Register new user
 // @route   POST /api/auth/register
-// @access  Private/Admin
+// @access  Public
 const register = async (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(400).json({ success: false, errors: errors.array() });
   }
 
-  const { name, email, password, role, phone, department, target } = req.body;
+  const { name, email, password, phone, department } = req.body;
 
   try {
     const existing = await User.findOne({ email });
@@ -125,8 +124,33 @@ const register = async (req, res) => {
       return res.status(400).json({ success: false, message: 'Email already registered.' });
     }
 
-    const user = await User.create({ name, email, password, role, phone, department, target });
-    res.status(201).json({ success: true, user });
+    const user = await User.create({
+      name,
+      email,
+      password,
+      role: 'bda',
+      phone,
+      department,
+      target: 1000000,
+    });
+
+    const token = generateToken(user._id);
+
+    res.status(201).json({
+      success: true,
+      token,
+      user: {
+        _id: user._id,
+        name: user.name,
+        email: user.email,
+        role: user.role,
+        phone: user.phone,
+        department: user.department,
+        avatar: user.avatar,
+        target: user.target,
+        initials: user.initials,
+      },
+    });
   } catch (err) {
     console.error('Register error:', err);
     res.status(500).json({ success: false, message: 'Server error during registration.' });

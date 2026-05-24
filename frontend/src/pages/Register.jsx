@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { Eye, EyeOff, Zap, TrendingUp, Users, BarChart3 } from 'lucide-react';
 import api from '../utils/api';
+import { useAuth } from '../context/AuthContext';
 import toast from 'react-hot-toast';
 
 const FEATURES = [
@@ -12,12 +13,12 @@ const FEATURES = [
 
 export default function Register() {
   const navigate = useNavigate();
+  const { login } = useAuth();
   const [form, setForm] = useState({
     name: '',
     email: '',
     password: '',
     confirmPassword: '',
-    role: 'bda',
     department: '',
     phone: '',
   });
@@ -34,16 +35,20 @@ export default function Register() {
 
     setLoading(true);
     try {
-      await api.post('/auth/register', {
+      const { data } = await api.post('/auth/register', {
         name: form.name,
         email: form.email,
         password: form.password,
-        role: form.role,
-        department: form.department,
         phone: form.phone,
+        department: form.department,
       });
-      toast.success('Account created! Please login.');
-      navigate('/login');
+
+      // Auto login after registration
+      localStorage.setItem('crm_token', data.token);
+      localStorage.setItem('crm_user', JSON.stringify(data.user));
+      api.defaults.headers.common['Authorization'] = `Bearer ${data.token}`;
+      toast.success('Account created! Welcome to Isaii CRM!');
+      navigate('/dashboard');
     } catch (err) {
       toast.error(err.response?.data?.message || 'Registration failed. Please try again.');
     } finally {
@@ -147,18 +152,6 @@ export default function Register() {
                   onChange={(e) => set('department', e.target.value)}
                 />
               </div>
-            </div>
-
-            <div>
-              <label className="label">Role <span className="text-red-500">*</span></label>
-              <select
-                className="select"
-                value={form.role}
-                onChange={(e) => set('role', e.target.value)}
-              >
-                <option value="bda">BDA (Business Development Associate)</option>
-                <option value="manager">Manager</option>
-              </select>
             </div>
 
             <div>
