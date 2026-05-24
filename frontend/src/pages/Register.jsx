@@ -11,6 +11,18 @@ const FEATURES = [
   { icon: BarChart3, text: 'Insights with real-time dashboards' },
 ];
 
+const inputStyle = {
+  width: '100%', padding: '8px 12px', fontSize: '14px',
+  border: '1px solid #d1d5db', borderRadius: '8px',
+  backgroundColor: '#ffffff', color: '#111827',
+  outline: 'none', transition: 'border-color 0.2s'
+};
+
+const labelStyle = {
+  display: 'block', fontSize: '14px',
+  fontWeight: '500', color: '#374151', marginBottom: '4px'
+};
+
 export default function Register() {
   const navigate = useNavigate();
   const { login } = useAuth();
@@ -56,7 +68,7 @@ export default function Register() {
   };
 
   return (
-    <div className="min-h-screen flex !bg-white" style={{ colorScheme: 'light' }}>
+    <div className="min-h-screen flex auth-page" style={{ colorScheme: 'light', backgroundColor: '#ffffff' }}>
       {/* Left panel */}
       <div className="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-gray-900 via-teal-950 to-gray-900 flex-col justify-between p-12">
         <div className="flex items-center gap-3">
@@ -92,11 +104,11 @@ export default function Register() {
         <p className="text-slate-600 text-xs">© {new Date().getFullYear()} Isaii AI. All rights reserved.</p>
       </div>
 
-      {/* Right panel - forced light mode */}
+      {/* Right panel */}
       <div className="flex-1 flex items-center justify-center p-6" style={{ backgroundColor: '#f9fafb' }}>
         <div className="w-full max-w-sm">
 
-          {/* Mobile logo - FIXED */}
+          {/* Mobile logo */}
           <div className="flex items-center gap-2 mb-6 lg:hidden">
             <div className="w-9 h-9 bg-indigo-600 rounded-xl flex items-center justify-center flex-shrink-0">
               <Zap size={18} className="text-white" />
@@ -109,10 +121,10 @@ export default function Register() {
 
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label className="label">Full Name <span className="text-red-500">*</span></label>
+              <label style={labelStyle}>Full Name <span style={{ color: '#ef4444' }}>*</span></label>
               <input
                 type="text"
-                className="input"
+                style={inputStyle}
                 placeholder="Arjun Sharma"
                 value={form.name}
                 onChange={(e) => set('name', e.target.value)}
@@ -120,10 +132,10 @@ export default function Register() {
             </div>
 
             <div>
-              <label className="label">Email address <span className="text-red-500">*</span></label>
+              <label style={labelStyle}>Email address <span style={{ color: '#ef4444' }}>*</span></label>
               <input
                 type="email"
-                className="input"
+                style={inputStyle}
                 placeholder="you@company.com"
                 value={form.email}
                 onChange={(e) => set('email', e.target.value)}
@@ -133,20 +145,20 @@ export default function Register() {
 
             <div className="grid grid-cols-2 gap-3">
               <div>
-                <label className="label">Phone</label>
+                <label style={labelStyle}>Phone</label>
                 <input
                   type="text"
-                  className="input"
+                  style={inputStyle}
                   placeholder="9876543210"
                   value={form.phone}
                   onChange={(e) => set('phone', e.target.value)}
                 />
               </div>
               <div>
-                <label className="label">Department</label>
+                <label style={labelStyle}>Department</label>
                 <input
                   type="text"
-                  className="input"
+                  style={inputStyle}
                   placeholder="Sales"
                   value={form.department}
                   onChange={(e) => set('department', e.target.value)}
@@ -155,11 +167,11 @@ export default function Register() {
             </div>
 
             <div>
-              <label className="label">Password <span className="text-red-500">*</span></label>
+              <label style={labelStyle}>Password <span style={{ color: '#ef4444' }}>*</span></label>
               <div className="relative">
                 <input
                   type={showPw ? 'text' : 'password'}
-                  className="input pr-10"
+                  style={{ ...inputStyle, paddingRight: '40px' }}
                   placeholder="Min 6 characters"
                   value={form.password}
                   onChange={(e) => set('password', e.target.value)}
@@ -167,7 +179,8 @@ export default function Register() {
                 <button
                   type="button"
                   onClick={() => setShowPw((p) => !p)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                  className="absolute right-3 top-1/2 -translate-y-1/2"
+                  style={{ color: '#9ca3af' }}
                 >
                   {showPw ? <EyeOff size={16} /> : <Eye size={16} />}
                 </button>
@@ -175,10 +188,10 @@ export default function Register() {
             </div>
 
             <div>
-              <label className="label">Confirm Password <span className="text-red-500">*</span></label>
+              <label style={labelStyle}>Confirm Password <span style={{ color: '#ef4444' }}>*</span></label>
               <input
                 type="password"
-                className="input"
+                style={inputStyle}
                 placeholder="Repeat your password"
                 value={form.confirmPassword}
                 onChange={(e) => set('confirmPassword', e.target.value)}

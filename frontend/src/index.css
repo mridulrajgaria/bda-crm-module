@@ -247,3 +247,48 @@
 .fade-in {
   animation: fadeIn 0.2s ease-out;
 }
+/* ============================================
+   AUTH PAGES - Force Light Mode Always
+   ============================================ */
+
+.auth-page {
+  background-color: #ffffff !important;
+  color-scheme: light !important;
+}
+
+.auth-page .bg-gray-50,
+.dark .auth-page .bg-gray-50 {
+  background-color: #f9fafb !important;
+}
+
+.auth-page .label,
+.dark .auth-page .label {
+  color: #374151 !important;
+}
+
+.auth-page .input,
+.dark .auth-page .input {
+  background-color: #ffffff !important;
+  border-color: #d1d5db !important;
+  color: #111827 !important;
+}
+
+.auth-page .input::placeholder,
+.dark .auth-page .input::placeholder {
+  color: #9ca3af !important;
+}
+
+.auth-page .text-gray-900,
+.dark .auth-page .text-gray-900 {
+  color: #111827 !important;
+}
+
+.auth-page .text-gray-500,
+.dark .auth-page .text-gray-500 {
+  color: #6b7280 !important;
+}
+
+.auth-page .text-gray-400,
+.dark .auth-page .text-gray-400 {
+  color: #9ca3af !important;
+}

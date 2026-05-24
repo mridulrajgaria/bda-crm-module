@@ -33,7 +33,7 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen flex !bg-white" style={{ colorScheme: 'light' }}>
+    <div className="min-h-screen flex auth-page" style={{ colorScheme: 'light', backgroundColor: '#ffffff' }}>
       {/* Left panel */}
       <div className="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-gray-900 via-teal-950 to-gray-900 flex-col justify-between p-12">
         <div className="flex items-center gap-3">
@@ -69,11 +69,11 @@ export default function Login() {
         <p className="text-slate-600 text-xs">© {new Date().getFullYear()} Isaii AI. All rights reserved.</p>
       </div>
 
-      {/* Right panel - forced light mode */}
+      {/* Right panel */}
       <div className="flex-1 flex items-center justify-center p-6" style={{ backgroundColor: '#f9fafb' }}>
         <div className="w-full max-w-sm">
 
-          {/* Mobile logo - only on small screens */}
+          {/* Mobile logo */}
           <div className="flex items-center gap-2 mb-6 lg:hidden">
             <div className="w-9 h-9 bg-indigo-600 rounded-xl flex items-center justify-center flex-shrink-0">
               <Zap size={18} className="text-white" />
@@ -86,32 +86,47 @@ export default function Login() {
 
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label className="label">Email address</label>
+              <label style={{ display: 'block', fontSize: '14px', fontWeight: '500', color: '#374151', marginBottom: '4px' }}>
+                Email address
+              </label>
               <input
                 type="email"
-                className="input"
                 placeholder="you@example.com"
                 value={form.email}
                 onChange={(e) => setForm((p) => ({ ...p, email: e.target.value }))}
                 autoComplete="email"
+                style={{
+                  width: '100%', padding: '8px 12px', fontSize: '14px',
+                  border: '1px solid #d1d5db', borderRadius: '8px',
+                  backgroundColor: '#ffffff', color: '#111827',
+                  outline: 'none', transition: 'border-color 0.2s'
+                }}
               />
             </div>
 
             <div>
-              <label className="label">Password</label>
+              <label style={{ display: 'block', fontSize: '14px', fontWeight: '500', color: '#374151', marginBottom: '4px' }}>
+                Password
+              </label>
               <div className="relative">
                 <input
                   type={showPw ? 'text' : 'password'}
-                  className="input pr-10"
                   placeholder="Enter your password"
                   value={form.password}
                   onChange={(e) => setForm((p) => ({ ...p, password: e.target.value }))}
                   autoComplete="current-password"
+                  style={{
+                    width: '100%', padding: '8px 40px 8px 12px', fontSize: '14px',
+                    border: '1px solid #d1d5db', borderRadius: '8px',
+                    backgroundColor: '#ffffff', color: '#111827',
+                    outline: 'none', transition: 'border-color 0.2s'
+                  }}
                 />
                 <button
                   type="button"
                   onClick={() => setShowPw((p) => !p)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                  className="absolute right-3 top-1/2 -translate-y-1/2"
+                  style={{ color: '#9ca3af' }}
                 >
                   {showPw ? <EyeOff size={16} /> : <Eye size={16} />}
                 </button>
