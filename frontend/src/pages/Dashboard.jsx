@@ -55,7 +55,7 @@ export default function Dashboard() {
   return (
     <div className="space-y-6">
       {/* Welcome banner */}
-      <div className="bg-gradient-to-r from-indigo-600 to-purple-600 rounded-2xl p-6 text-white">
+      <div className="bg-gradient-to-r from-slate-800 to-slate-700 rounded-2xl p-6 text-white border-l-4 border-emerald-500">
         <h2 className="text-xl font-bold mb-0.5">Good {getGreeting()}, {user?.name?.split(' ')[0]}! 👋</h2>
         <p className="text-indigo-200 text-sm">Here's what's happening with your sales pipeline today.</p>
       </div>
