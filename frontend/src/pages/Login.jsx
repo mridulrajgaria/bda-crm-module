@@ -33,11 +33,11 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen flex">
+    <div className="min-h-screen flex !bg-white" style={{ colorScheme: 'light' }}>
       {/* Left panel */}
       <div className="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-gray-900 via-teal-950 to-gray-900 flex-col justify-between p-12">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 bg-indigo-500 rounded-xl flex items-center justify-center">
+          <div className="w-10 h-10 bg-indigo-500 rounded-xl flex items-center justify-center flex-shrink-0">
             <Zap size={20} className="text-white" />
           </div>
           <div>
@@ -69,19 +69,20 @@ export default function Login() {
         <p className="text-slate-600 text-xs">© {new Date().getFullYear()} Isaii AI. All rights reserved.</p>
       </div>
 
-      {/* Right panel */}
-      <div className="flex-1 flex items-center justify-center p-6 bg-gray-50">
+      {/* Right panel - forced light mode */}
+      <div className="flex-1 flex items-center justify-center p-6" style={{ backgroundColor: '#f9fafb' }}>
         <div className="w-full max-w-sm">
-          {/* Mobile logo */}
-          <div className="w-10 h-10 bg-teal-500 rounded-xl flex items-center justify-center">
-            <div className="w-9 h-9 bg-indigo-600 rounded-xl flex items-center justify-center">
+
+          {/* Mobile logo - only on small screens */}
+          <div className="flex items-center gap-2 mb-6 lg:hidden">
+            <div className="w-9 h-9 bg-indigo-600 rounded-xl flex items-center justify-center flex-shrink-0">
               <Zap size={18} className="text-white" />
             </div>
-            <p className="font-bold text-xl text-gray-900">Isaii CRM</p>
+            <p className="font-bold text-xl" style={{ color: '#111827' }}>Isaii CRM</p>
           </div>
 
-          <h1 className="text-2xl font-bold text-gray-900 mb-1">Welcome back</h1>
-          <p className="text-gray-500 text-sm mb-7">Sign in to your account to continue</p>
+          <h1 className="text-2xl font-bold mb-1" style={{ color: '#111827' }}>Welcome back</h1>
+          <p className="text-sm mb-7" style={{ color: '#6b7280' }}>Sign in to your account to continue</p>
 
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
@@ -128,13 +129,14 @@ export default function Login() {
           </form>
 
           <div className="mt-8 text-center">
-            <p className="text-sm text-gray-400">
+            <p className="text-sm" style={{ color: '#9ca3af' }}>
               Don't have an account?{' '}
               <Link to="/register" className="text-indigo-600 font-medium hover:underline">
                 Create account
               </Link>
             </p>
           </div>
+
         </div>
       </div>
     </div>
