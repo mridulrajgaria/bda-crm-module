@@ -3,18 +3,48 @@
 
 ---
 
-## 🚀 Features
+## 🚀 Live Demo
+
+| | Link |
+|--|--|
+| **Live App** | https://bda-crm-module.vercel.app |
+| **Backend API** | https://bda-crm-backend-dtx1.onrender.com |
+| **GitHub** | https://github.com/mridulrajgaria/bda-crm-module |
+
+> ⚠️ **Note:** The backend is hosted on Render's free tier. First request may take **30-50 seconds** to wake up. Please wait and try again if login is slow.
+
+---
+
+## 🔑 Demo Login Credentials
+
+| Role | Email | Password | Access |
+|------|-------|----------|--------|
+| **Admin** | admin@isaii.in | Admin@123 | Full access — all modules, team management, reports |
+| **Manager** | manager1@isaii.in | Manager@123 | All leads, team performance, reports |
+| **BDA** | bda1@isaii.in | BDA@123 | Own leads, activities, clients |
+
+> New users can also self-register at `/register` (assigned BDA role by default)
+
+---
+
+## ✨ Features
 
 ### Core Modules
 | Module | Features |
 |--------|----------|
-| **Auth** | JWT login, role-based access (Admin / Manager / BDA), protected routes |
+| **Auth** | JWT login, role-based access (Admin / Manager / BDA), register, protected routes |
 | **Lead Pipeline** | Kanban board with drag-and-drop, list view, filters, priority tags, source tracking |
+| **Lead Detail** | Full lead profile with pipeline progress bar, activity timeline, contact info |
 | **Client Management** | Client profiles, deal history, contact info, industry segmentation |
 | **Activity Tracker** | Log calls, emails, meetings, demos, follow-ups with status & outcomes |
 | **Team Performance** | Individual BDA metrics, target vs. achievement, leaderboard |
 | **Dashboard** | KPI cards, lead funnel chart, monthly revenue trend, conversion rates |
-| **Reports** | Filterable reports by date range, BDA, product, status |
+| **Reports** | Filterable reports by date range, BDA, product, status + CSV export |
+| **Profile** | Edit profile, upload profile picture, change password |
+| **Settings** | Notification preferences, display settings, dark mode |
+| **Dark Mode** | Full app dark mode toggle, saved in localStorage |
+| **Global Search** | Search leads and clients from navbar |
+| **Notifications** | Bell icon with notification dropdown |
 
 ### Role Permissions
 | Action | Admin | Manager | BDA |
@@ -41,7 +71,7 @@
 - React Router v6
 - Axios
 - Recharts (charts)
-- @hello-pangea/dnd (Kanban DnD)
+- @hello-pangea/dnd (Kanban drag & drop)
 - react-hot-toast (notifications)
 - lucide-react (icons)
 
@@ -50,23 +80,16 @@
 ## ⚙️ Environment Setup
 
 ### Backend `.env`
-Create `/backend/.env` from the example:
-```bash
-cp backend/.env.example backend/.env
-```
-
-Fill in:
 ```env
 PORT=5000
 MONGO_URI=mongodb://localhost:27017/bda_crm
-JWT_SECRET=your_super_secret_jwt_key_here_make_it_long
+JWT_SECRET=your_super_secret_jwt_key_here
 JWT_EXPIRES_IN=7d
 CLIENT_URL=http://localhost:5173
 NODE_ENV=development
 ```
 
 ### Frontend `.env`
-Create `/frontend/.env`:
 ```env
 VITE_API_URL=http://localhost:5000/api
 ```
@@ -78,23 +101,35 @@ VITE_API_URL=http://localhost:5000/api
 ### Prerequisites
 - Node.js >= 18.x
 - MongoDB (local or Atlas URI)
-- npm or yarn
+- npm
 
 ### 1. Clone & Install
 
 ```bash
-# Clone the repository
-git clone https://github.com/YOUR_USERNAME/bda-crm-module.git
+git clone https://github.com/mridulrajgaria/bda-crm-module.git
 cd bda-crm-module
 
-# Install backend dependencies
+# Install backend
 cd backend && npm install
 
-# Install frontend dependencies
+# Install frontend
 cd ../frontend && npm install
 ```
 
-### 2. Seed the Database (optional but recommended)
+### 2. Setup Environment Files
+
+```bash
+cd backend
+cp .env.example .env
+# Edit .env with your MongoDB URI and JWT secret
+```
+
+```bash
+cd frontend
+echo "VITE_API_URL=http://localhost:5000/api" > .env
+```
+
+### 3. Seed the Database
 
 ```bash
 cd backend
@@ -102,12 +137,12 @@ npm run seed
 ```
 
 This creates:
-- 1 Admin user: `admin@isaii.in` / `Admin@123`
-- 2 Manager users: `manager1@isaii.in` / `Manager@123`
-- 5 BDA users: `bda1@isaii.in` / `BDA@123`
-- Sample leads, clients, and activities
+- 1 Admin: `admin@isaii.in` / `Admin@123`
+- 2 Managers: `manager1@isaii.in` / `Manager@123`
+- 5 BDAs: `bda1@isaii.in` / `BDA@123`
+- 60 sample leads, 6 clients, 120 activities
 
-### 3. Run the Application
+### 4. Run the Application
 
 **Terminal 1 — Backend:**
 ```bash
@@ -126,35 +161,29 @@ npm run dev
 ---
 
 ## 📁 Project Structure
-
-```
 bda-crm-module/
 ├── backend/
 │   ├── config/
-│   │   ├── db.js           # MongoDB connection
-│   │   └── seed.js         # Database seeder
-│   ├── controllers/        # Business logic
+│   │   ├── db.js
+│   │   └── seed.js
+│   ├── controllers/
 │   ├── middleware/
-│   │   ├── auth.js         # JWT protect middleware
-│   │   └── roleCheck.js    # Role-based guard
-│   ├── models/             # Mongoose schemas
-│   ├── routes/             # Express routers
+│   │   ├── auth.js
+│   │   └── roleCheck.js
+│   ├── models/
+│   ├── routes/
 │   ├── .env.example
-│   ├── package.json
 │   └── server.js
 └── frontend/
-    ├── src/
-    │   ├── components/     # Reusable UI components
-    │   ├── context/        # React context (Auth)
-    │   ├── hooks/          # Custom hooks
-    │   ├── pages/          # Route-level pages
-    │   ├── utils/          # Axios instance, helpers
-    │   ├── App.jsx
-    │   └── main.jsx
-    ├── index.html
-    ├── tailwind.config.js
-    └── vite.config.js
-```
+├── src/
+│   ├── components/
+│   ├── context/
+│   ├── pages/
+│   ├── utils/
+│   ├── App.jsx
+│   └── main.jsx
+├── vercel.json
+└── vite.config.js
 
 ---
 
@@ -163,9 +192,10 @@ bda-crm-module/
 | Method | Endpoint | Auth | Description |
 |--------|----------|------|-------------|
 | POST | `/api/auth/login` | Public | Login |
+| POST | `/api/auth/register` | Public | Register (BDA role) |
 | GET | `/api/auth/me` | Any | Current user |
 | GET | `/api/dashboard/stats` | Any | KPI summary |
-| GET | `/api/leads` | Any | List leads (filtered) |
+| GET | `/api/leads` | Any | List leads |
 | POST | `/api/leads` | BDA+ | Create lead |
 | PUT | `/api/leads/:id` | BDA+ | Update lead |
 | PUT | `/api/leads/:id/status` | BDA+ | Move in pipeline |
@@ -182,27 +212,9 @@ bda-crm-module/
 
 ## 🚢 Deployment
 
-**Backend** → Render.com / Railway.app
-- Set all environment variables in the dashboard
-- Build command: `npm install`
-- Start command: `npm start`
-
-**Frontend** → Vercel / Netlify
-- Build command: `npm run build`
-- Output directory: `dist`
-- Set `VITE_API_URL` to your deployed backend URL
-
----
-
-## 📸 Screenshots
-
-> Dashboard, Kanban Board, Team Performance, Activity Log
-
----
-
-## 🤝 Contributing
-
-Built for the Isaii AI Technical Assessment — MERN Stack Developer Intern Role.
+- **Frontend** → Vercel
+- **Backend** → Render
+- **Database** → MongoDB Atlas
 
 ---
 
